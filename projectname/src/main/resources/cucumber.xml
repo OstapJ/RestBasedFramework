@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath:applicationContext.xml"/>
+
+	<bean id="propertyFiles" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>runconfig</value>
+				<value>enterprise</value> <!-- keep this item last since its values may need to be overridden -->
+			</list>
+		</constructor-arg>
+	</bean>
+
+    <bean class="com.epam.rest.configuration.RestfulClientConfiguration"/>
+
+	<bean id="mappingJackson2HttpMessageConverter"
+		  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<!--<property name="objectMapper" ref="apiJsonObjectMapper"/>-->
+	</bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<ref bean="propertyFiles"/>
+		</property>
+	</bean>
+
+
+</beans>

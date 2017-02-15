@@ -1,4 +1,11 @@
 *.class
+*.idea
+
+*.idea
+*.iml
+!pom.xml
+!.gitignore
+!sonar-project.properties
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
