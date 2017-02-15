@@ -6,7 +6,7 @@ import static com.epam.rest.model.dto.DTOFactory.dto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.epam.rest.dto.UserDTO;
-import com.epam.rest.rest.User;
+import com.epam.rest.rest.UserService;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -18,13 +18,13 @@ import com.epam.rest.model.HttpResponseModel;
 public class UserStep extends AbstractStepDefinition {
 
     @Autowired
-    private User user;
+    private UserService userService;
 
     private HttpResponseModel<UserDTO> response;
 
     @Given("^Get User Information$")
     public void getUserInformation() {
-        HttpResponseModel<UserDTO> response = user.getUser();
+        HttpResponseModel<UserDTO> response = userService.getUser();
         this.response = response;
     }
 
