@@ -1,17 +1,22 @@
 package com.epam.rest.step;
 
 import com.epam.rest.PropertiesManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 
-/**
- * Created by U0160473 on 2/2/2015.
- */
 @ContextConfiguration("classpath:cucumber.xml")
-public class AbstractStepDefinition
+public abstract class AbstractStepDefinition
 {
+
 	@Autowired
 	protected PropertiesManager properties;
+
+
 
 }

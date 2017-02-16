@@ -8,6 +8,7 @@
 
 	<context:property-placeholder location="classpath:runconfig.properties" system-properties-mode="OVERRIDE"/>
 	<bean id="applicationContextProvider" class="com.epam.rest.ApplicationContextProvider"/>
+	<bean id="webDriver" class="com.epam.rest.WebDriver"/>
 
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">

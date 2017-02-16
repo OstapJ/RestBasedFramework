@@ -4,8 +4,11 @@ import com.epam.rest.dto.UserDTO;
 import com.epam.rest.model.HttpResponseModel;
 import com.epam.rest.model.annotation.Get;
 import com.epam.rest.model.annotation.HttpResponse;
+import com.epam.rest.model.annotation.Path;
 import com.epam.rest.model.annotation.ResourcePath;
 import com.epam.rest.model.annotation.RestfulClient;
+
+import javax.annotation.Resource;
 
 @RestfulClient
 public interface UserService {
@@ -14,5 +17,10 @@ public interface UserService {
     @ResourcePath("/user")
     @HttpResponse
     HttpResponseModel<UserDTO> getUser();
+
+    @Get
+    @ResourcePath("/user/{login}")
+    @HttpResponse
+    HttpResponseModel<UserDTO> getUserLogin(@Path("login") String login);
 
 }

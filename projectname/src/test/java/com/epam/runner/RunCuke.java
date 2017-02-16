@@ -9,8 +9,8 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(
 		format = { "pretty", "json:target/cucumber.json" },
 		glue = { "com.epam.rest.step" },
-		features = { "src/main/resources/com.epam.rest/feature/" }
+		features = { "src/test/resources/feature/" }
 )
-public class RunCukeTest
+public class RunCuke
 {
 }
