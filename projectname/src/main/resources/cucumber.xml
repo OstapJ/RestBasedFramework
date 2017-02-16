@@ -19,7 +19,6 @@
 
 	<bean id="mappingJackson2HttpMessageConverter"
 		  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-		<!--<property name="objectMapper" ref="apiJsonObjectMapper"/>-->
 	</bean>
 
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
