@@ -7,7 +7,8 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		format = { "pretty", "json:target/cucumber.json" },
+		format = { "pretty", "json:target/cucumber.json",
+				"com.epam.reportportal.cucumber.ScenarioReporter" },
 		glue = { "com.epam.rest.step" },
 		features = { "src/test/resources/feature/" }
 )

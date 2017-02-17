@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +42,8 @@ public class RestfulClientHandler implements MethodHandler {
     @Autowired
     private RestTemplate restTemplate;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(RestfulClientHandler.class);
+
     /**
      * Performs look up of interface model, builds uri for requests, delegates execution to rest tempaltes
      * and handles the response.
@@ -61,6 +65,7 @@ public class RestfulClientHandler implements MethodHandler {
             String url = uri(context().getEndpoint(), restfulCallModel.getResourcePath(), thisMethod, args);
             HttpEntity entity = entity(thisMethod, args);
             ResponseEntity response = null;
+            LOGGER.debug("{} {} resource ", restfulCallModel.getHttpMethod(), url);
             try {
                 response = restTemplate().exchange(url, restfulCallModel.getHttpMethod(), entity,
                         restfulCallModel.getResponseType());
@@ -167,8 +172,14 @@ public class RestfulClientHandler implements MethodHandler {
         try {
             if (method.isAnnotationPresent(HttpResponse.class)) {
                 Class<?> httpReponseType = method.getReturnType();
-                return exception == null ? httpReponseType.getConstructor(ResponseEntity.class).newInstance(entity)
-                        : httpReponseType.getConstructor(HttpClientErrorException.class).newInstance(exception);
+
+                if(exception == null){
+                    LOGGER.debug("Response {}", entity.getStatusCode());
+                    return httpReponseType.getConstructor(ResponseEntity.class).newInstance(entity);
+                }
+                else {
+                    return httpReponseType.getConstructor(HttpClientErrorException.class).newInstance(exception);
+                }
             } else {
                 return entity.getBody();
             }
