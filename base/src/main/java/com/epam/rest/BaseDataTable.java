@@ -141,6 +141,11 @@ public class BaseDataTable implements Iterable {
                 int length = Integer.valueOf(StringUtils.split(result, '_')[1]);
                 result = RandomStringUtils.randomAlphanumeric(length);
             }
+            else if (result.startsWith(BaseConstants.DATATABLE_KEYWORD_GLOBAL))
+            {
+                Globals globals = (Globals) ApplicationContextProvider.getApplicationContext().getBean("globals");
+                result = globals.get(StringUtils.split(result, '_')[1]);
+            }
         }
 
         return result;

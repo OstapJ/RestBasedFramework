@@ -19,13 +19,12 @@ public class DashboardDTO
         this.owner = owner;
     }
 
-    public String getIsShared()
-    {
+
+    public String getIsShared() {
         return isShared;
     }
 
-    public void setIsShared(String isShared)
-    {
+    public void setIsShared(String isShared) {
         this.isShared = isShared;
     }
 
