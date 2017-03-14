@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,8 +175,10 @@ public class RestfulClientHandler implements MethodHandler {
             if (method.isAnnotationPresent(HttpResponse.class)) {
                 Class<?> httpReponseType = method.getReturnType();
 
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
                 if(exception == null){
-                    LOGGER.debug("Response {}\n{}",entity.getStatusCode(), new Gson().toJson(entity.getBody()));
+                    LOGGER.debug("Response {}\n{}",entity.getStatusCode(), gson.toJson(entity.getBody()));
                     return httpReponseType.getConstructor(ResponseEntity.class).newInstance(entity);
                 }
                 else {

@@ -64,13 +64,13 @@
                         </goals>
                         <configuration>
                             <!--Uncomment the code below and tests would be launched in 2 forks-->
-                            <!--<forkCount>2</forkCount>-->
-                            <!--<reuseForks>true</reuseForks>-->
+                            <forkCount>1</forkCount>
+                            <reuseForks>true</reuseForks>
                             <!--<includes>-->
                                 <!--<include>**/*IT.class</include>-->
                             <!--</includes>-->
                             <includes>
-                                <include>**/RunCuke.*</include>
+                                <include>**/RunCuk*.*</include>
                             </includes>
                         </configuration>
                     </execution>

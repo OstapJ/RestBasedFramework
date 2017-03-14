@@ -1,14 +1,16 @@
 @service
 Feature: Verify API calls related to Dashboard functionality
 
+  @TestCase-2014
   Scenario: Get dashboard
     When Get Dashboard:
       | projectName | dashboardId              |
       | crt-odc     | 585ceea03cdea20008436b6c |
     Then Dashboard response should contain:
-      | owner             | isShared | name  |
+      | owner            | isShared | name  |
       | ievgen_ostapenko | true     | Smoke |
 
+  @TestCase-2015
   Scenario: Get dashboards
     When Get Dashboards:
       | projectName | dashboardId              |
@@ -19,6 +21,7 @@ Feature: Verify API calls related to Dashboard functionality
       | ievgen_ostapenko | true     | Single Story |
       | ievgen_ostapenko | true     | REGRESSION   |
 
+  @TestCase-2016
   Scenario: Create dashboard
     When Post Dashboard:
       | projectName               | name     | share |
