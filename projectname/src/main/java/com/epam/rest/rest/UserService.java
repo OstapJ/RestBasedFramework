@@ -8,8 +8,6 @@ import com.epam.rest.model.annotation.Path;
 import com.epam.rest.model.annotation.ResourcePath;
 import com.epam.rest.model.annotation.RestfulClient;
 
-import javax.annotation.Resource;
-
 @RestfulClient
 public interface UserService {
 

@@ -6,7 +6,7 @@ Feature: Verify API calls related to Dashboard functionality
       | projectName | dashboardId              |
       | crt-odc     | 585ceea03cdea20008436b6c |
     Then Dashboard response should contain:
-      | owner            | isShared | name  |
+      | owner             | isShared | name  |
       | ievgen_ostapenko | true     | Smoke |
 
 

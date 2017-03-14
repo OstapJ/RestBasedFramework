@@ -55,14 +55,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18.1</version>
-                <configuration>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>com.epam.reportportal.cucumber.StepReporter</value>
-                        </property>
-                    </properties>
-                </configuration>
                 <executions>
                     <execution>
                         <id>acceptance-test</id>
@@ -71,10 +63,14 @@
                             <goal>test</goal>
                         </goals>
                         <configuration>
-                            <!--<forkCount>1</forkCount>-->
+                            <!--Uncomment the code below and tests would be launched in 2 forks-->
+                            <!--<forkCount>2</forkCount>-->
                             <!--<reuseForks>true</reuseForks>-->
+                            <!--<includes>-->
+                                <!--<include>**/*IT.class</include>-->
+                            <!--</includes>-->
                             <includes>
-                                <include>**/*IT.class</include>
+                                <include>**/RunCuke.*</include>
                             </includes>
                         </configuration>
                     </execution>
@@ -92,19 +88,6 @@
             <groupId>com.epam.training</groupId>
             <artifactId>base</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
         </dependency>
     </dependencies>
 
