@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
@@ -65,6 +66,16 @@ public class DashboardStep extends AbstractStepDefinition {
                 .isEqualTo(HttpStatus.OK);
         assertThat(response.dto()).as("Dashboard response doesn't match to the expected one")
                 .isEqualToIgnoringNullFields(dashboardDTO);
+    }
+
+//    @Then("^Dashboard response should contain:$")
+    public void verifyDashboard(final String expectedResponse, final HttpResponseModel<DashboardDTO> actualResponse) {
+        Gson gson = new Gson();
+
+        assertThat(actualResponse.statusCode()).as("Response status code doesn't match to the expected one")
+                .isEqualTo(HttpStatus.OK);
+        assertThat(actualResponse.dto()).as("Dashboard response doesn't match to the expected one")
+                .isEqualToIgnoringNullFields(gson.fromJson(expectedResponse, DashboardDTO.class));
     }
 
     @Then("^Dashboard responses should contain:$")

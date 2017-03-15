@@ -1,6 +1,5 @@
 package com.epam.rest.support;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
@@ -17,13 +16,13 @@ public class RestfulClientBeanPostProcessor implements BeanPostProcessor {
     private RestfulClientHandler handler;
 
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessBeforeInitialization(Object bean, String beanName) {
         return bean;
     }
 
     @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if(beanName.startsWith(SupportConstants.PROXIED_INTERFACES_BEAN_NAME_PREF)){
+    public Object postProcessAfterInitialization(Object bean, String beanName) {
+        if (beanName.startsWith(SupportConstants.PROXIED_INTERFACES_BEAN_NAME_PREF)) {
             ProxyObject.class.cast(bean).setHandler(handler);
         }
         return bean;

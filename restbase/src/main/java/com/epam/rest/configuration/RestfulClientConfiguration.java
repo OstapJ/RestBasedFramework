@@ -11,7 +11,6 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import com.epam.rest.support.EnableRestfulClients;
-import com.epam.rest.support.RestfulClientBeanPostProcessor;
 
 /**
  * Spring configuration
@@ -30,7 +29,7 @@ public class RestfulClientConfiguration {
 
     public HttpClient apacheHttpClient() {
         return HttpClientBuilder.create().setConnectionManager(poolingHttpClientConnectionManager())
-//                .addInterceptorFirst(context().preemtiveRequestInterceptor())
+                // .addInterceptorFirst(context().preemtiveRequestInterceptor())
                 .setDefaultHeaders(context.oAuthCredentialsProvider()).build();
     }
 
