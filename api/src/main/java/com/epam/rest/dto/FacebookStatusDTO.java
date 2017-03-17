@@ -18,4 +18,18 @@ public class FacebookStatusDTO {
     @JsonProperty("push")
     private FacebookStatusPushDTO facebookStatusPushDTO;
 
+    @Data
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public class FacebookStatusCurrentDTO {
+        Integer health;
+        String subject;
+    }
+
+    @Data
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public class FacebookStatusPushDTO {
+        String status;
+        Integer id;
+    }
+
 }
