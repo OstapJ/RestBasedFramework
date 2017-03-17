@@ -16,7 +16,7 @@ import com.google.common.net.UrlEscapers;
 public class UriPathTemplate {
 
     /* Path variable Regular Expression */
-    private static Pattern PATH_VARIABLE_PATTERN = Pattern.compile("\\{(.*?)\\}");
+    private static final Pattern PATH_VARIABLE_PATTERN = Pattern.compile("\\{(.*?)\\}");
 
     /* URL template */
     private String template;
@@ -26,7 +26,7 @@ public class UriPathTemplate {
 
     private UriPathTemplate(String template) {
 
-        this.pathVariables = new LinkedList<String>();
+        this.pathVariables = new LinkedList<>();
         this.template = template;
 
         parsePathVariables();

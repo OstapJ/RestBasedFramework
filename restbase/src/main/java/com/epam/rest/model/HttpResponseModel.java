@@ -18,7 +18,7 @@ public class HttpResponseModel<T> {
     private HttpHeaders headers;
     private T dto;
 
-    //TODO: replace with POJO mapped to JSON
+    // TODO: replace with POJO mapped to JSON
     private String errorMessage;
 
     public HttpResponseModel(ResponseEntity<T> entity) {
@@ -27,40 +27,38 @@ public class HttpResponseModel<T> {
         dto = entity.getBody();
     }
 
-    public HttpResponseModel(HttpClientErrorException exception){
+    public HttpResponseModel(HttpClientErrorException exception) {
         statusCode = exception.getStatusCode();
         headers = exception.getResponseHeaders();
         errorMessage = exception.getResponseBodyAsString();
         dto = null;
     }
 
-    public T dto(){
+    public T dto() {
         return dto;
     }
 
-    public HttpStatus statusCode(){
+    public HttpStatus statusCode() {
         return statusCode;
     }
 
-    public boolean hasErrors(){
+    public boolean hasErrors() {
         return StringUtils.isNotBlank(errorMessage);
     }
 
-
-
-    public String contentType(){
+    public String contentType() {
         return header(HttpHeaders.CONTENT_TYPE);
     }
 
-    public HttpHeaders allHeaders(){
+    public HttpHeaders allHeaders() {
         return headers;
     }
 
-    public List<String> headerValues(String name){
+    public List<String> headerValues(String name) {
         return allHeaders().get(name);
     }
 
-    public String header(String name){
+    public String header(String name) {
         List<String> headers = headerValues(name);
         return (headers != null && !headers.isEmpty()) ? headers.get(0) : null;
     }
@@ -71,15 +69,23 @@ public class HttpResponseModel<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof HttpResponseModel)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof HttpResponseModel)) {
+            return false;
+        }
 
         HttpResponseModel that = (HttpResponseModel) o;
 
-        if (dto != null ? !dto.equals(that.dto) : that.dto != null) return false;
-        if (errorMessage != null ? !errorMessage.equals(that.errorMessage) : that.errorMessage != null) return false;
-        if (headers != null ? !headers.equals(that.headers) : that.headers != null) return false;
-        if (statusCode != that.statusCode) return false;
+        if (dto != null ? !dto.equals(that.dto) : that.dto != null)
+            return false;
+        if (errorMessage != null ? !errorMessage.equals(that.errorMessage) : that.errorMessage != null)
+            return false;
+        if (headers != null ? !headers.equals(that.headers) : that.headers != null)
+            return false;
+        if (statusCode != that.statusCode)
+            return false;
 
         return true;
     }
@@ -95,11 +101,7 @@ public class HttpResponseModel<T> {
 
     @Override
     public String toString() {
-        return "HttpResponseModel{" +
-                "statusCode=" + statusCode +
-                ", headers=" + headers +
-                ", dto=" + dto +
-                ", errorMessage='" + errorMessage + '\'' +
-                '}';
+        return "HttpResponseModel{" + "statusCode=" + statusCode + ", headers=" + headers + ", dto=" + dto
+                + ", errorMessage='" + errorMessage + '\'' + '}';
     }
 }

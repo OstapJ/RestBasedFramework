@@ -3,21 +3,20 @@ package com.epam.rest.support;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
 import com.epam.rest.model.RestfulCallModel;
 import com.epam.rest.model.RestfulCallModelMapper;
 import com.epam.rest.model.annotation.RestfulClient;
+import com.google.common.collect.Maps;
 
 /**
  * Holds mappings of proxy class to rest client interface model
  */
 class RestfulClientInventory {
 
+    private static final Map<Class<?>, Map<Method, RestfulCallModel>> SPECS = Maps.newHashMap();
+
     private RestfulClientInventory() {
     }
-
-    private static final Map<Class<?>, Map<Method, RestfulCallModel>> specs = Maps.newHashMap();
 
     /**
      * Save mapping of client interface to method model
@@ -26,7 +25,7 @@ class RestfulClientInventory {
      * @return
      */
     public static void addSpec(Class<?> clientInterface) {
-        specs.put(clientInterface, RestfulCallModelMapper.sourceInterface(clientInterface).map());
+        SPECS.put(clientInterface, RestfulCallModelMapper.sourceInterface(clientInterface).map());
     }
 
     /**
@@ -36,7 +35,7 @@ class RestfulClientInventory {
      * @return
      */
     public static Map<Method, RestfulCallModel> lookup(Class<?> clientInterface) {
-        Map<Method, RestfulCallModel> spec = specs.get(clientInterface);
+        Map<Method, RestfulCallModel> spec = SPECS.get(clientInterface);
         if (null == spec) {
             throw new IllegalStateException(new StringBuilder().append("\"Specification for restful client interface {")
                     .append(clientInterface).append("} has not been found").toString());

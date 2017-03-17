@@ -3,10 +3,10 @@ Feature: Verify API calls related to Dashboard functionality
 
   @TestCase-2014
   Scenario: Get dashboard
-#    Given Get Facebook
-#    Then Facebook Status response should contain:
-#      | current.health   | current.subject | push.status | push.id |
-#      | ievgen_ostapenko | true            | Smoke       | Smoke   |
+    Given Get Facebook
+    Then Facebook Status response should contain:
+      | current.health   | current.subject | push.status | push.id |
+      | ievgen_ostapenko | true            | Smoke       | Smoke   |
     When Get Dashboard:
       | projectName | dashboardId              |
       | crt-odc     | 585ceea03cdea20008436b6c |
