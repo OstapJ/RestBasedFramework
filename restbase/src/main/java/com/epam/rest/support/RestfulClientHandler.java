@@ -64,7 +64,14 @@ public class RestfulClientHandler implements MethodHandler {
                     .setMessageConverters(Arrays.asList((MappingJackson2HttpMessageConverter) ApplicationContextProvider
                             .getApplicationContext().getBean("mappingJackson2HttpMessageConverter")));
             RestfulCallModel restfulCallModel = RestfulClientInventory.lookup(self).get(thisMethod);
-            String url = uri(context().getEndpoint(), restfulCallModel.getResourcePath(), thisMethod, args);
+            String url;
+            if(restfulCallModel.getResourcePath().startsWith("http")){
+                 url = uri("", restfulCallModel.getResourcePath(), thisMethod, args);
+            }
+            else {
+                 url = uri(context().getEndpoint(), restfulCallModel.getResourcePath(), thisMethod, args);
+
+            }
             HttpEntity entity = entity(thisMethod, args);
             ResponseEntity response = null;
             LOGGER.debug("{} {} resource ", restfulCallModel.getHttpMethod(), url);

@@ -11,7 +11,7 @@
     <modules>
         <module>base</module>
         <module>restbase</module>
-        <module>projectname</module>
+        <module>api</module>
     </modules>
 
     <properties>
@@ -22,6 +22,7 @@
         <cucumber.version>1.2.2</cucumber.version>
         <cucumber-html>0.2.3</cucumber-html>
         <assertj.version>3.0.0</assertj.version>
+        <lombok>1.16.4</lombok>
     </properties>
 
     <dependencyManagement>
@@ -37,6 +38,14 @@
                 <artifactId>slf4j-api</artifactId>
                 <version>${logger.version}</version>
             </dependency>
+            <!-- lombok for Getter Setters-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!--lombok -->
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
