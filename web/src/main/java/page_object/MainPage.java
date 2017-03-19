@@ -1,25 +1,29 @@
 package page_object;
 
-import org.openqa.selenium.support.FindBy;
-
 import com.codeborne.selenide.SelenideElement;
 
-public class MainPage extends AbstractPage
-{
+import static com.codeborne.selenide.Selenide.$;
 
-    @FindBy(css = "input.search")
-    public SelenideElement searchTextBox;
+public class MainPage extends AbstractPage {
 
-    @FindBy(css = "li.grid__item ul")
-    public SelenideElement login;
+//    @FindBy(css = "input.search")
+//    public SelenideElement searchTextBox;
+//
+//    @FindBy(css = "li.grid__item ul")
+//    public SelenideElement login;
 
-    public SelenideElement getSearchTextBox()
-    {
+    public SelenideElement searchTextBox = $("input.search");
+
+    public SelenideElement login = $("li.grid__item ul");
+    public SelenideElement searchTextArea = $("#lst-ib");
+
+
+
+    public SelenideElement getSearchTextBox() {
         return searchTextBox;
     }
 
-    public void clickAnyAvailableDate()
-    {
+    public void clickAnyAvailableDate() {
 //        popupCalendar.$(xpath("(./div[1]/button)[2]")).click();
 //        popupCalendar.$("span[data-ng-click]").click();
 //        popupCalendar.$("span[data-ng-click]").click();

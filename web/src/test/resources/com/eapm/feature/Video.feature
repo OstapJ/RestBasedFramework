@@ -13,6 +13,10 @@ Feature: Verify published video content on ElenTube site
 
   @TestCase-2002
   Scenario: Verify video search by tags
+    Given Get Facebook
+    Then Facebook Status response should contain:
+      | current.health   | current.subject | push.status | push.id |
+      | ievgen_ostapenko | true            | Smoke       | Smoke   |
     Given I navigate to Main page
     When I search Video with the following values:
       | tag   |
