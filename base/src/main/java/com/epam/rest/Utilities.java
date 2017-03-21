@@ -19,8 +19,6 @@ import org.apache.commons.lang3.text.WordUtils;
 
 /**
  * Generic Utility static methods that are application/project independent
- *
- * @author Arkady Yankovsky u6023775
  */
 public class Utilities
 {

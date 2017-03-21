@@ -32,8 +32,8 @@
                             <!-- Where to output the generated Junit tests -->
                             <outputDirectory>${project.build.directory}/generated-test-sources/cucumber
                             </outputDirectory>
-                            <!-- The diectory containing your feature files.  -->
-                            <featuresDirectory>src/test/resources/feature</featuresDirectory>
+                            <!-- The diectory containing your com.epam.feature files.  -->
+                            <featuresDirectory>src/test/resources/com.epam.feature</featuresDirectory>
                             <!-- Directory where the cucumber report files shall be written  -->
                             <cucumberOutputDir>target/cucumber-parallel</cucumberOutputDir>
                             <!-- comma separated list of output formats -->
@@ -44,7 +44,7 @@
                             <monochrome>true</monochrome>
                             <!-- The tags to run, maps to CucumberOptions.tags property -->
                             <tags>"@service"</tags>
-                            <!-- If set to true, only feature files containing the required tags shall be generated. -->
+                            <!-- If set to true, only com.epam.feature files containing the required tags shall be generated. -->
                             <!-- Excluded tags (~@notMe) are ignored. -->
                             <filterFeaturesByTags>true</filterFeaturesByTags>
                         </configuration>

@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 		format = { "pretty", "json:target/cucumber.json",
 				"com.epam.reportportal.cucumber.ScenarioReporter" },
 		glue = { "com.epam.rest.step" },
-		features = { "src/test/resources/com/eapm/feature" }
+		features = { "src/test/resources/com/epam/feature" }
 )
 public class RunCuke
 {

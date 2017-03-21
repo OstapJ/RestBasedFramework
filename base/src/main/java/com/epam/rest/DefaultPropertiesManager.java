@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by U0160473 on 1/29/2015.
- */
+
 @Component("propertiesManager")
 public class DefaultPropertiesManager implements PropertiesManager {
     @Autowired
