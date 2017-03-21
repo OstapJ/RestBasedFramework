@@ -25,7 +25,6 @@ import cucumber.api.java.en.Then;
 /**
  * Created by Ievgen_Ostapenko on 2/13/2017.
  */
-// @Component
 public class DashboardStep extends AbstractStepDefinition {
 
     @Autowired

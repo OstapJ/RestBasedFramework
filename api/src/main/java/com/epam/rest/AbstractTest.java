@@ -14,7 +14,7 @@ import org.testng.annotations.DataProvider;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@ContextConfiguration("classpath:cucumber.xml")
+//@ContextConfiguration("classpath:cucumber.xml")
 public abstract class AbstractTest extends AbstractTestNGSpringContextTests {
 
     protected static final String DATA_PROVIDER_METHOD = "loadFromExamplesTable";
