@@ -59,6 +59,7 @@ public class DashboardStep extends AbstractStepDefinition {
         globals.put("dashboardName", dashboardDTO.getName());
     }
 
+
     @Given("^Delete Dashboard:$")
     public void deleteDashboard(final DataTable table) throws InterruptedException {
         BaseDataTable t = new BaseDataTable(table);
