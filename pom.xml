@@ -13,6 +13,7 @@
         <module>restbase</module>
         <module>api</module>
         <module>web</module>
+        <module>restApiPoc</module>
     </modules>
 
     <properties>

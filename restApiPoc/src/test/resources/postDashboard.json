@@ -1,0 +1,12 @@
+{
+  "projectName": "crtodc",
+  "createDashboardDTO": {
+    "share": "false",
+    "name": "My Dashboard"
+  },
+  "dashboard": {
+    "owner": "ievgen_ostapenko",
+    "isShared": false,
+    "name": "My Dashboard"
+  }
+}
