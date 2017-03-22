@@ -119,7 +119,7 @@ public class UriPathTemplate {
             if (template.indexOf("?") == -1) {
                 template.append("?");
             }
-            Joiner.on('&').withKeyValueSeparator("=").appendTo(template, parameters);
+            Joiner.on("&").withKeyValueSeparator("=").appendTo(template, parameters);
             return this;
         }
 

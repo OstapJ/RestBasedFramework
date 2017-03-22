@@ -5,7 +5,7 @@ import com.epam.rest.PropertiesManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-//@ContextConfiguration("classpath:cucumber.xml")
+@ContextConfiguration("classpath:cucumber.xml")
 public abstract class AbstractStepDefinition
 {
 

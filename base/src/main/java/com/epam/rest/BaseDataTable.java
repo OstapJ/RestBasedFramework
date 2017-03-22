@@ -10,12 +10,10 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.common.collect.Sets;
+import cucumber.api.DataTable;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Sets;
-
-import cucumber.api.DataTable;
 
 /**
  * Created by Ievgen_Ostapenko on 2/13/2017.

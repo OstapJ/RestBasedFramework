@@ -3,12 +3,12 @@ package com.epam.rest.model.dto;
 import java.lang.reflect.Method;
 import java.util.Set;
 
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.epam.rest.BaseDataTable;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
