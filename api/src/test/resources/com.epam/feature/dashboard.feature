@@ -29,39 +29,13 @@ Feature: Verify API calls related to Dashboard functionality
       | projectName               | dashboardId        |
       | ievgen_ostapenko_personal | GLOBAL_dashboardId |
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#  @TestCase-2015
-#  Scenario: Get dashboards
-#    When Get Dashboards:
-#      | projectName | dashboardId              |
-#      | crt-odc     | 585ceea03cdea20008436b6c |
-#    Then Dashboard responses should contain:
-#      | owner            | isShared | name         |
-#      | ievgen_ostapenko | true     | Smoke        |
-#      | ievgen_ostapenko | true     | Single Story |
-#      | ievgen_ostapenko | true     | REGRESSION   |
+  @TestCase-2015
+  Scenario: Get dashboards
+    When Get Dashboards:
+      | projectName | dashboardId              |
+      | crt-odc     | 585ceea03cdea20008436b6c |
+    Then Dashboard responses should contain:
+      | owner            | isShared | name         |
+      | ievgen_ostapenko | true     | Smoke        |
+      | ievgen_ostapenko | true     | Single Story |
+      | ievgen_ostapenko | true     | REGRESSION   |

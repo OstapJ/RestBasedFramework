@@ -59,6 +59,14 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
+                        </property>
+                    </properties>
+                    <parallel>methods</parallel>
+                    <threadCount>2</threadCount>
                     <includes>
                         <include>**/*IT.java</include>
                     </includes>

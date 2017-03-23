@@ -1,65 +1,88 @@
 package com.epam.test;
 
 import annotation.TestData;
-import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.path.json.JsonPath;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import dto.CreateDashboardDTO;
 import dto.DashboardDTO;
 import org.apache.http.HttpStatus;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import property.Props;
 
-import static com.jayway.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Created by Ostap on 22.03.2017.
- */
-public class DashboardIT extends AbstractTest {
+public class DashboardIT extends Configuration {
 
+	private String createdDashboardId;
 
-    @BeforeClass
-    public void setUp() {
-        RestAssured.baseURI = "https://rp.epam.com/api/v1";
-
-    }
-
-    public RequestSpecification givenConfig() {
-        return given().
-                header("Accept-Language", "en").header("Content-Type", "application/json").header("Authorization", "Bearer 514c84ea-2996-41d0-afff-bc107ec7296f").log().all();
-    }
-
-
-    @Test(description = "TestCase-2014 Get Dashboard", dataProvider = DATA_PROVIDER_METHOD)
+	//@formatter:off
+    @Test(description = "TestCase-2013 Get Dashboard", dataProvider = DATA_PROVIDER_METHOD)
     @TestData("getDashboard.json")
-    public void getDashboard(final JsonPath testData) {
-        DashboardDTO dto = testData.getObject("dashboard", DashboardDTO.class);
-        Response response = givenConfig().
-                when().
-                get(Props.getRestEndPoint("dashboard"), testData.get("projectName"), testData.get("dashboardId"));
+    public void verifyGetDashboardCall(final JsonPath testData) {
+        DashboardDTO expectedBody = testData.getObject("dashboard", DashboardDTO.class);
+        DashboardDTO actualBody =
+			givenConfig().
+			when().
+					get(Props.getRestEndPoint("dashboardById"), testData.get("projectName"), testData.get("dashboardId")).
+			then().
+					statusCode(HttpStatus.SC_OK).
+			extract().
+					response().as(DashboardDTO.class);
 
-        assertThat(response.statusCode()).as("Response status code doesn't match to the expected one")
-                .isEqualTo(HttpStatus.SC_OK);
-        assertThat(response.as(DashboardDTO.class)).as("Dashboard response doesn't match to the expected one")
-                .isEqualToIgnoringNullFields(dto);
+        assertThat(expectedBody).as("Response Body doesn't match to the expected one")
+				.isNotNull()
+                .isEqualTo(actualBody);
     }
 
-    @Test
-    public void getDashboardSecond() {
-        System.out.println("Thread Name" + Thread.currentThread().getName() + " ID " + Thread.currentThread().getId());
-        DashboardDTO dto = new DashboardDTO();
-        dto.setIsShared("true");
-        dto.setName("Smoke");
-        dto.setOwner("ievgen_ostapenko");
-        Response response = givenConfig().
-                when().
-                get("/{projectName}/dashboard/{dashboardId}", "crt-odc", "585ceea03cdea20008436b6c");
+    @Test(description = "TestCase-2014 Get Dashboards", dataProvider = DATA_PROVIDER_METHOD)
+    @TestData("getDashboards.json")
+    public void getDashboards(final JsonPath testData) {
+        DashboardDTO[] dto = testData.getObject("dashboards", DashboardDTO[].class);
+        DashboardDTO[] expectedDto =
+			givenConfig().
+			when().
+					get(Props.getRestEndPoint("dashboard"), testData.getString("projectName")).
+			then().
+					statusCode(HttpStatus.SC_OK).
+			extract().
+					response().as(DashboardDTO[].class);
 
-        assertThat(response.statusCode()).as("Response status code doesn't match to the expected one")
-                .isEqualTo(HttpStatus.SC_OK);
-        assertThat(response.as(DashboardDTO.class)).as("DashboardIT response doesn't match to the expected one")
-                .isEqualToIgnoringNullFields(dto);
+        assertThat(dto).as("Response Body doesn't match to the expected one").isEqualTo(expectedDto);
     }
+
+    @Test(description = "TestCase-2015 Post Dashboard", dataProvider = DATA_PROVIDER_METHOD)
+    @TestData("postDashboard.json")
+    public void postDashboard(final JsonPath testData) {
+        CreateDashboardDTO createDashboardDTO = testData.getObject("createDashboardDTO", CreateDashboardDTO.class);
+        DashboardDTO dashboardDTO = testData.getObject("dashboard", DashboardDTO.class);
+
+        createdDashboardId =
+			givenConfig().
+					body(createDashboardDTO)
+			.when()
+					.post(Props.getRestEndPoint("dashboard"), testData.getString("projectName"))
+			.then()
+					.statusCode(HttpStatus.SC_CREATED)
+			.extract().
+					body().jsonPath().get("id");
+		DashboardDTO actualDto = givenConfig().
+			when().
+					get(Props.getRestEndPoint("dashboardById"), testData.get("projectName"), createdDashboardId).
+			then().
+					statusCode(HttpStatus.SC_OK).
+			extract().
+					response().as(DashboardDTO.class);
+
+		assertThat(actualDto).as("Response Body doesn't match to the expected one").isEqualTo(dashboardDTO);
+    }
+    @Test(description = "TestCase-2016 Delete Dashboard", dependsOnMethods = {
+            "postDashboard" }, dataProvider = DATA_PROVIDER_METHOD)
+    @TestData("postDashboard.json")
+    public void deleteDashboard(final JsonPath testData) {
+        givenConfig().
+				when().
+				delete(Props.getRestEndPoint("dashboardById"), testData.get("projectName"), createdDashboardId).
+				then().
+				statusCode(HttpStatus.SC_OK);
+    }
+	//@formatter:on
 }
