@@ -26,14 +26,18 @@ import org.springframework.context.annotation.Lazy;
  */
 public class VideoStep extends AbstractStepDefinition{
 
-    @Autowired
-    MainPage mainPage;
+//    @Autowired
+//    MainPage mainPage;
+//
+//    @Autowired
+//    CarMarketPage carMarketPage;
+//
+//    @Autowired
+//    CarViewerPage carViewerPage;
 
-    @Autowired
-    CarMarketPage carMarketPage;
-
-    @Autowired
-    CarViewerPage carViewerPage;
+    MainPage mainPage = new MainPage();
+    CarMarketPage carMarketPage = new CarMarketPage();
+    CarViewerPage carViewerPage = new CarViewerPage();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VideoStep.class);
 
@@ -41,28 +45,34 @@ public class VideoStep extends AbstractStepDefinition{
     public void init(){
         System.setProperty("webdriver.chrome.driver", "C:\\Windows\\System32\\chromedriver.exe");
         Configuration.browser = "chrome";
-        open("https://www.onliner.by/");
+
     }
 
     @When("^I navigate to Main page$")
-    public void navigateTo() {
-
-
+    public void navigateToHome() {
+        open("https://www.onliner.by/");
     }
 
     @When("^I search Video with the following values:$")
-    public void searchVideoByTags(final DataTable table) throws InterruptedException {
-        mainPage.markDropDown.selectOptionByValue("BMW");
-        mainPage.modelDropDown.selectOption("   120");
-        mainPage.searchButton.click();
-        carMarketPage.carLinks.filterBy(Condition.text("BMW 120")).first().click();
+    public void searchCar()  {
+        mainPage.selectMark("BMW");
+        mainPage.selectModelDropDown("   120");
+        mainPage.clickSearchButton();
         LOGGER.info("RP_MESSAGE#FILE#{}#{}", Screenshots.takeScreenShotAsFile().getAbsolutePath(),
                 "Proof the screenshot could be saved in RP");
-        carViewerPage.costLabels.shouldHave(CollectionCondition.texts("8250 $", "7670 €"));
-        carMarketPage.autoSectionWidget.chapterLinks.get(0).click();
+//        carMarketPage.autoSectionWidget.chapterLinks.get(0).click();
     }
 
     @Then("^I should see the video with the following values:$")
-    public void verifyVideoTags(final DataTable table) {
+    public void selectCar() {
+        carMarketPage.clickCarLinkByText("BMW 120");
     }
+
+
+
+        @Then("^I should see the video with the following values:$")
+    public void verifyCarPrice() {
+            carViewerPage.costLabels.shouldHave(CollectionCondition.texts("8250 $", "7670 €"));
+
+        }
 }
