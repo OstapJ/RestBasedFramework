@@ -1,6 +1,5 @@
 package com.epam.rest;
 
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +9,6 @@ import java.util.Map;
 /**
  * Utility class to track global objects for a scenario that can be accessed across its different steps.
  */
-@Component("globals")
 public class Globals
 {
 	private ThreadLocal<Map<String, Object>> temporaryValues = new ThreadLocal<>();

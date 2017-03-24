@@ -12,9 +12,12 @@
     <artifactId>base</artifactId>
     <name>base</name>
 
-
-
     <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
+
         <!-- lombok for Getter Setters-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -28,8 +31,9 @@
 
         <dependency>
             <groupId>com.epam.reportportal</groupId>
-            <artifactId>agent-java-cucumber</artifactId>
+            <artifactId>agent-java-testng</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -38,6 +42,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
@@ -55,63 +60,9 @@
         </dependency>
 
         <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-java</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-junit</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-spring</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-html</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-        </dependency>
     </dependencies>
 </project>

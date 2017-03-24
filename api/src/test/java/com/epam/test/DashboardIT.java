@@ -5,6 +5,8 @@ import com.jayway.restassured.path.json.JsonPath;
 import dto.CreateDashboardDTO;
 import dto.DashboardDTO;
 import org.apache.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 import property.Props;
 
@@ -12,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DashboardIT extends Configuration {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(DashboardIT.class);
 	private String createdDashboardId;
 
 	//@formatter:off

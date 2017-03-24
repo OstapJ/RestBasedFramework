@@ -2,7 +2,6 @@ package com.epam.rest.page_object;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import com.epam.rest.page_object.widget.AutoSectionWidget;
 import com.epam.rest.page_object.widget.AutoSectionWidgetCustom;
 
 import static com.codeborne.selenide.Selenide.$;

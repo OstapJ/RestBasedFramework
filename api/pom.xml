@@ -8,92 +8,63 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+
     <artifactId>api</artifactId>
 
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.github.temyers</groupId>
-                <artifactId>cucumber-jvm-parallel-plugin</artifactId>
-                <version>1.0.1</version>
-                <executions>
-                    <execution>
-                        <id>generateRunners</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>generateRunners</goal>
-                        </goals>
-                        <configuration>
-                            <!-- Mandatory -->
-                            <!-- comma separated list of package names to scan for glue code -->
-                            <glue>com.epam.rest.step</glue>
-                            <!-- These are the default values -->
-                            <!-- Where to output the generated Junit tests -->
-                            <outputDirectory>${project.build.directory}/generated-test-sources/cucumber</outputDirectory>
-                            <!-- The diectory containing your com.epam.feature files.  -->
-                            <featuresDirectory>src/test/resources/com.epam</featuresDirectory>
-                            <!--<featuresDirectory>classpath:test.check/</featuresDirectory>-->
-                            <!-- Directory where the cucumber report files shall be written  -->
-                            <cucumberOutputDir>target/cucumber-parallel</cucumberOutputDir>
-                            <!-- comma separated list of output formats -->
-                            <format>com.epam.reportportal.cucumber.ScenarioReporter</format>
-                            <!-- CucumberOptions.strict property -->
-                            <strict>true</strict>
-                            <!-- CucumberOptions.monochrome property -->
-                            <monochrome>true</monochrome>
-                            <!-- The tags to run, maps to CucumberOptions.tags property -->
-                            <!--<tags>"@service"</tags>-->
-                            <tags>"@service"</tags>
-                            <!-- If set to true, only com.epam.feature files containing the required tags shall be generated. -->
-                            <!-- Excluded tags (~@notMe) are ignored. -->
-                            <filterFeaturesByTags>true</filterFeaturesByTags>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
-                <executions>
-                    <execution>
-                        <id>acceptance-test</id>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <configuration>
-                            <!--Uncomment the code below and tests would be launched in n forks-->
-                            <forkCount>1</forkCount>
-                            <reuseForks>true</reuseForks>
-                            <!--<includes>-->
-                                <!--<include>**/*IT.class</include>-->
-                            <!--</includes>-->
-                            <includes>
-                                <include>**/RunCuke.*</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
     <dependencies>
-        <dependency>
-            <groupId>com.epam.training</groupId>
-            <artifactId>restbase</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>com.epam.training</groupId>
             <artifactId>base</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.jayway.restassured/rest-assured -->
+        <dependency>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
     </dependencies>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
+                        </property>
+                    </properties>
+                    <!--<parallel>methods</parallel>-->
+                    <!--<threadCount>2</threadCount>-->
+                    <!--<includes>-->
+                        <!--<include>**/*IT.java</include>-->
+                    <!--</includes>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

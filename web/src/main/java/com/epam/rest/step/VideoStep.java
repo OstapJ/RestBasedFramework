@@ -6,12 +6,8 @@ import com.codeborne.selenide.Screenshots;
 import com.epam.rest.page_object.CarMarketPage;
 import com.epam.rest.page_object.CarViewerPage;
 import com.epam.rest.page_object.MainPage;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.annotation.PostConstruct;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -20,7 +16,7 @@ import static com.codeborne.selenide.Selenide.open;
 /**
  * Created by Ievgen_Ostapenko on 3/17/2017.
  */
-public class VideoStep extends AbstractStepDefinition {
+public class VideoStep {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(VideoStep.class);
 
@@ -34,12 +30,10 @@ public class VideoStep extends AbstractStepDefinition {
 
 	}
 
-	@When("^I navigate to Main page$")
 	public void navigateToHome() {
 		open("https://www.onliner.by/");
 	}
 
-	@When("^I search Video with the following values:$")
 	public void searchCar() throws InvocationTargetException, IllegalAccessException {
 		CarDto carDto = new CarDto();
 		carDto.setMarkDropDown("BMW");
@@ -51,13 +45,11 @@ public class VideoStep extends AbstractStepDefinition {
 		//		carMarketPage.autoSectionWidget.chapterLinks.get(0).click();
 	}
 
-	@Then("^I should see the video with the following values:$")
 	public void selectCar() {
 		//		carMarketPage = new CarMarketPage();
 		carMarketPage.clickCarLinkByText("BMW 120");
 	}
 
-	@Then("^I should see the video with the following values:$")
 	public void verifyCarPrice() {
 		carMarketPage.autoSectionWidget.chapterLinks().get(0).click();
 
