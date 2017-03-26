@@ -1,4 +1,4 @@
-package exception;
+package com.epam.rest.exception;
 
 /**
  * Created by Ostap on 22.03.2017.

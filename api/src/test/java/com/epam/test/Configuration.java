@@ -1,14 +1,18 @@
 package com.epam.test;
 
-import annotation.TestData;
+import com.epam.rest.annotation.TestData;
 import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.config.DecoderConfig;
+import com.jayway.restassured.config.EncoderConfig;
+import com.jayway.restassured.config.ObjectMapperConfig;
+import com.jayway.restassured.config.RestAssuredConfig;
 import com.jayway.restassured.path.json.JsonPath;
 import com.jayway.restassured.path.json.config.JsonPathConfig;
 import com.jayway.restassured.specification.RequestSpecification;
-import exception.TestDataException;
+import com.epam.rest.exception.TestDataException;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
-import property.Props;
+import com.epam.rest.Props;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -16,12 +20,12 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.internal.mapper.ObjectMapperType.GSON;
 
 /**
  * Created by Ostap on 22.03.2017.
  */
-public abstract class Configuration
-{
+public abstract class Configuration {
     protected static final String DATA_PROVIDER_METHOD = "loadFromExamplesTable";
 
     public Configuration() {
@@ -30,6 +34,10 @@ public abstract class Configuration
 
     @BeforeSuite
     public void setUp() {
+        RestAssured.config = new RestAssuredConfig().
+                decoderConfig(new DecoderConfig("UTF-8")).
+                encoderConfig(new EncoderConfig("UTF-8", "UTF-8")).
+                objectMapperConfig(new ObjectMapperConfig(GSON));
         RestAssured.baseURI = Props.getProp("baseUrl");
     }
 
@@ -44,7 +52,7 @@ public abstract class Configuration
     public Object[][] loadFromExamplesTable(Method method) {
         String examplesTableFile = "/" + method.getAnnotation(TestData.class).value();
         JsonPath testData = loadJsonFile(examplesTableFile);
-        return new Object[][] { { testData } };
+        return new Object[][]{{testData}};
     }
 
     private JsonPath loadJsonFile(String path) {

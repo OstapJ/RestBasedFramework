@@ -1,6 +1,6 @@
 package com.epam.test;
 
-import annotation.TestData;
+import com.epam.rest.annotation.TestData;
 import com.jayway.restassured.path.json.JsonPath;
 import dto.CreateDashboardDTO;
 import dto.DashboardDTO;
@@ -8,7 +8,7 @@ import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-import property.Props;
+import com.epam.rest.Props;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,6 +21,7 @@ public class DashboardIT extends Configuration {
     @Test(description = "TestCase-2013 Get Dashboard", dataProvider = DATA_PROVIDER_METHOD)
     @TestData("getDashboard.json")
     public void verifyGetDashboardCall(final JsonPath testData) {
+    	LOGGER.debug("Just wanna check that logging works");
         DashboardDTO expectedBody = testData.getObject("dashboard", DashboardDTO.class);
         DashboardDTO actualBody =
 			givenConfig().
@@ -39,7 +40,9 @@ public class DashboardIT extends Configuration {
     @Test(description = "TestCase-2014 Get Dashboards", dataProvider = DATA_PROVIDER_METHOD)
     @TestData("getDashboards.json")
     public void getDashboards(final JsonPath testData) {
-        DashboardDTO[] dto = testData.getObject("dashboards", DashboardDTO[].class);
+		LOGGER.debug("Just wanna check that logging works");
+
+		DashboardDTO[] dto = testData.getObject("dashboards", DashboardDTO[].class);
         DashboardDTO[] expectedDto =
 			givenConfig().
 			when().
@@ -55,7 +58,9 @@ public class DashboardIT extends Configuration {
     @Test(description = "TestCase-2015 Post Dashboard", dataProvider = DATA_PROVIDER_METHOD)
     @TestData("postDashboard.json")
     public void postDashboard(final JsonPath testData) {
-        CreateDashboardDTO createDashboardDTO = testData.getObject("createDashboardDTO", CreateDashboardDTO.class);
+		LOGGER.debug("Just wanna check that logging works");
+
+		CreateDashboardDTO createDashboardDTO = testData.getObject("createDashboardDTO", CreateDashboardDTO.class);
         DashboardDTO dashboardDTO = testData.getObject("dashboard", DashboardDTO.class);
 
         createdDashboardId =
@@ -81,7 +86,9 @@ public class DashboardIT extends Configuration {
             "postDashboard" }, dataProvider = DATA_PROVIDER_METHOD)
     @TestData("postDashboard.json")
     public void deleteDashboard(final JsonPath testData) {
-        givenConfig().
+		LOGGER.debug("Just wanna check that logging works");
+
+		givenConfig().
 				when().
 				delete(Props.getRestEndPoint("dashboardById"), testData.get("projectName"), createdDashboardId).
 				then().

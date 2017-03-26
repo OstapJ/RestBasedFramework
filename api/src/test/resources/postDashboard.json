@@ -2,11 +2,11 @@
   "projectName": "ievgen_ostapenko_personal",
   "createDashboardDTO": {
     "share": "false",
-    "name": "My DashboardAAAAAAA"
+    "name": "My DashboardAAAAAAAA"
   },
   "dashboard": {
     "owner": "ievgen_ostapenko",
     "isShared": false,
-    "name": "My DashboardAAAAAAA"
+    "name": "My DashboardAAAAAAAA"
   }
 }

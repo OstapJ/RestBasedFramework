@@ -1,0 +1,7 @@
+{
+  "car": {
+    "markDropDown": "BMW",
+    "modelDropDown": "   120",
+    "carPrices": ["8250 $", "7656 €"]
+  }
+}

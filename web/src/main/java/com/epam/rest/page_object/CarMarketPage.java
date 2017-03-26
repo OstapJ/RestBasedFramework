@@ -16,7 +16,8 @@ public class CarMarketPage extends AbstractPage {
 		autoSectionWidget = new AutoSectionWidgetCustom($("div[class='b-autosections']"));
 	}
 
-	public void clickCarLinkByText(final String text) {
+	public CarViewerPage clickCarLinkByText(final String text) {
 		carLinks.filterBy(Condition.text(text)).first().click();
+		return new CarViewerPage();
 	}
 }
