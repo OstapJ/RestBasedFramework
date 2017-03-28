@@ -20,8 +20,7 @@ public class DashboardIT extends Configuration {
 	//@formatter:off
     @Test(description = "TestCase-2013 Get Dashboard", dataProvider = DATA_PROVIDER_METHOD)
     @TestData("getDashboard.json")
-    public void verifyGetDashboardCall(final JsonPath testData) {
-    	LOGGER.debug("Just wanna check that logging works");
+    public void verifyGetDashboardCall(final JsonPath testData){
         DashboardDTO expectedBody = testData.getObject("dashboard", DashboardDTO.class);
         DashboardDTO actualBody =
 			givenConfig().

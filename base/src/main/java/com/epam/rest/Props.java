@@ -11,6 +11,7 @@ public class Props {
 	private static Properties environmentProps;
 	private static Properties properties;
 
+
 	/**
 	 * Gets the key from messages.properties for a Site
 	 *
@@ -40,22 +41,5 @@ public class Props {
 			return ResourceBundle.getBundle("config").getString(key);
 
 		}
-	}
-
-	public static void loadRunConfigProps(String configPropertyFileLocation) {
-		//        environmentProps = new Properties();
-		//        try (InputStream inputStream = Props.class.getResourceAsStream(configPropertyFileLocation)) {
-		//            environmentProps.load(inputStream);
-		//            environmentProps.list(out);
-		//        } catch (IOException e) {
-		//            LOG.error(e.getMessage());
-		//        }
-		//        properties = new Properties();
-		//        try (InputStream inputStream = Props.class.getResourceAsStream("/restEndPoint.properties")) {
-		//            properties.load(inputStream);
-		//            properties.list(out);
-		//        } catch (IOException e) {
-		//            LOG.error(e.getMessage());
-		//        }
 	}
 }

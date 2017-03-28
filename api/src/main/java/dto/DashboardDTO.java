@@ -7,10 +7,8 @@ import lombok.Data;
  */
 
 @Data
-//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DashboardDTO {
     private String owner;
     private String isShared;
     private String name;
-
 }

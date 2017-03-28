@@ -22,11 +22,6 @@
             <artifactId>commons-beanutils</artifactId>
             <version>1.8.3</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.codeborne</groupId>
-            <artifactId>selenide</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -48,12 +43,12 @@
                             <goal>test</goal>
                         </goals>
                         <configuration>
-                            <parallel>methods</parallel>
-                            <threadCount>2</threadCount>
+                            <!--<parallel>methods</parallel>-->
+                            <!--<threadCount>1</threadCount>-->
                             <properties>
                                 <property>
                                     <name>listener</name>
-                                    <value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
+                                    <value>com.epam.rest.report_portal.testng.ReportPortalTestNGListener</value>
                                 </property>
                             </properties>
                             <includes>

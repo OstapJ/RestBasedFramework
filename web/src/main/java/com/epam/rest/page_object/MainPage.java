@@ -11,8 +11,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class MainPage extends AbstractPage {
 
     public SelenideElement markDropDown = $("#car-1>select"),
-            modelDropDown = $("#car-2>select"),
-            searchButton = $("[class='btn-green-2 btn']");
+                           modelDropDown = $("#car-2>select"),
+                           searchButton = $("[class='btn-green-2 btn']");
 
     public SelenideElement getSearchButton() {
         String locator = Props.getRestEndPoint("mainPage.searchButton");
@@ -42,8 +42,4 @@ public class MainPage extends AbstractPage {
         return clickSearchButton();
     }
 
-    @Override
-    public String toString() {
-        return "MainPage{}";
-    }
 }

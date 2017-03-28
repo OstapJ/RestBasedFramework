@@ -44,7 +44,7 @@ public abstract class Configuration {
     protected static RequestSpecification givenConfig() {
         return given().header("Accept-Language", "en").
                 header("Content-Type", "application/json").
-                header("Authorization", "Bearer a73efe60-36db-4dc6-b6a7-c1bf27083c20").
+                header("Authorization", "Bearer c421be78-a615-4085-a24a-722645f5871c").
                 log().all();
     }
 

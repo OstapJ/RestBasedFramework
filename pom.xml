@@ -70,6 +70,11 @@
                 <version>${reportPortal-testng.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.epam.reportportal</groupId>
+                <artifactId>client-java-core</artifactId>
+                <version>${reportPortal-testng.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>${gson.version}</version>
