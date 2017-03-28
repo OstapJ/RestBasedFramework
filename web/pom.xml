@@ -28,36 +28,35 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <includes>
+                        <include>**/UserStory*.class</include>
+                    </includes>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>com.wbeedvc.taf.reportportal.testng.ReportPortalTestNGListener</value>
+                        </property>
+                    </properties>
+                    <parallel>methods</parallel>
+                    <threadCount>2</threadCount>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>acceptance-test</id>
-                        <phase>integration-test</phase>
                         <goals>
-                            <goal>test</goal>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
-                        <configuration>
-                            <!--<parallel>methods</parallel>-->
-                            <!--<threadCount>1</threadCount>-->
-                            <properties>
-                                <property>
-                                    <name>listener</name>
-                                    <value>com.epam.rest.report_portal.testng.ReportPortalTestNGListener</value>
-                                </property>
-                            </properties>
-                            <includes>
-                                <include>**/UserStory*.class</include>
-                            </includes>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+
 </project>
