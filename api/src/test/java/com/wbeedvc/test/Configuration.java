@@ -12,7 +12,7 @@ import com.jayway.restassured.specification.RequestSpecification;
 import com.wbeedvc.taf.exception.TestDataException;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
-import com.wbeedvc.taf.Props;
+import com.wbeedvc.taf.property.Props;
 
 import java.io.File;
 import java.lang.reflect.Method;

@@ -2,21 +2,17 @@ package com.wbeedvc.taf;
 
 import com.wbeedvc.taf.annotation.TestData;
 import com.wbeedvc.taf.exception.TestDataException;
-import com.wbeedvc.taf.reportportal.testng.ReportPortalTestNGListener;
 import io.restassured.path.json.JsonPath;
 import io.restassured.path.json.config.JsonPathConfig;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
 
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-/**
- * Created by Ievgen_Ostapenko on 3/23/2017.
- */
+
 //@Listeners({ ReportPortalTestNGListener.class})
 public class Configuration {
 	protected static final String DATA_PROVIDER_METHOD = "loadFromExamplesTable";
@@ -42,9 +38,9 @@ public class Configuration {
 		}
 	}
 
-	@BeforeClass
+	@BeforeSuite
 	public void init() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Windows\\System32\\chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "C:\\Windows\\System32\\chromedriver.exe");
 		com.codeborne.selenide.Configuration.browser = "chrome";
 	}
 }

@@ -4,6 +4,7 @@ import com.codeborne.selenide.Screenshots;
 import com.epam.reportportal.listeners.ListenerParameters;
 import com.epam.reportportal.listeners.ReportPortalListenerContext;
 import com.epam.reportportal.service.BatchedReportPortalService;
+import com.wbeedvc.taf.logger.Logger;
 import com.wbeedvc.taf.reportportal.common.Statuses;
 import com.wbeedvc.taf.reportportal.common.TestMethodType;
 import com.epam.ta.reportportal.ws.model.EntryCreatedRS;
@@ -18,8 +19,6 @@ import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import io.restassured.path.json.JsonPath;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.ISuite;
 import org.testng.ISuiteResult;
 import org.testng.ITestContext;
@@ -36,7 +35,6 @@ import static com.epam.reportportal.listeners.ListenersUtils.handleException;
  * TestNG service implements operations for interaction report portal
  */
 public class TestNGService implements ITestNGService {
-	private final Logger logger = LoggerFactory.getLogger(TestNGService.class);
 
 	public static final String ID = "id";
 	public static final String NOT_ISSUE = "NOT_ISSUE";
@@ -76,7 +74,7 @@ public class TestNGService implements ITestNGService {
 			rs = reportPortalService.startLaunch(rq);
 		}
 		catch (Exception e) {
-			handleException(e, logger, "Unable start the launch: '" + testNGContext.getLaunchName() + "'");
+			handleException(e, Logger.out, "Unable start the launch: '" + testNGContext.getLaunchName() + "'");
 		}
 		if (rs != null) {
 			testNGContext.setLaunchID(rs.getId());
@@ -92,7 +90,7 @@ public class TestNGService implements ITestNGService {
 			reportPortalService.finishLaunch(testNGContext.getLaunchID(), rq);
 		}
 		catch (Exception e) {
-			handleException(e, logger, "Unable finish the launch: '" + testNGContext.getLaunchID() + "'");
+			handleException(e, Logger.out, "Unable finish the launch: '" + testNGContext.getLaunchID() + "'");
 		}
 	}
 
@@ -108,7 +106,7 @@ public class TestNGService implements ITestNGService {
 			rs = reportPortalService.startRootTestItem(rq);
 		}
 		catch (Exception e) {
-			handleException(e, logger, "Unable start test suite: '" + suite.getName() + "'");
+			handleException(e, Logger.out, "Unable start test suite: '" + suite.getName() + "'");
 		}
 		if (rs != null) {
 			suite.setAttribute(ID, rs.getId());
@@ -124,7 +122,7 @@ public class TestNGService implements ITestNGService {
 			reportPortalService.finishTestItem(String.valueOf(suite.getAttribute(ID)), rq);
 		}
 		catch (Exception e) {
-			handleException(e, logger, "Unable finish test suite: '" + suite.getAttribute(ID) + "'");
+			handleException(e, Logger.out, "Unable finish test suite: '" + suite.getAttribute(ID) + "'");
 		}
 	}
 
@@ -140,7 +138,7 @@ public class TestNGService implements ITestNGService {
 			rs = reportPortalService.startTestItem(String.valueOf(testContext.getSuite().getAttribute(ID)), rq);
 		}
 		catch (Exception e) {
-			handleException(e, logger, "Unable start test: '" + testContext.getName() + "'");
+			handleException(e, Logger.out, "Unable start test: '" + testContext.getName() + "'");
 		}
 		if (rs != null) {
 			testContext.setAttribute(ID, rs.getId());
@@ -163,7 +161,7 @@ public class TestNGService implements ITestNGService {
 			reportPortalService.finishTestItem(String.valueOf(testContext.getAttribute(ID)), rq);
 		}
 		catch (Exception e) {
-			handleException(e, logger, "Unable finish test: '" + testContext.getAttribute(ID) + "'");
+			handleException(e, Logger.out, "Unable finish test: '" + testContext.getAttribute(ID) + "'");
 		}
 	}
 
@@ -186,7 +184,7 @@ public class TestNGService implements ITestNGService {
 			rs = reportPortalService.startTestItem(String.valueOf(testResult.getTestContext().getAttribute(ID)), rq);
 		}
 		catch (Exception e) {
-			handleException(e, logger,
+			handleException(e, Logger.out,
 					new StringBuilder("Unable start test method: '").append(testStepName).append("'").toString());
 		}
 		if (rs != null) {
@@ -194,7 +192,7 @@ public class TestNGService implements ITestNGService {
 			ReportPortalListenerContext.setRunningNowItemId(rs.getId());
 		}
 		JsonPath testData = (JsonPath) testResult.getParameters()[0];
-		logger.info("Expected Values for the Test\n" + testData.prettify());
+		Logger.out.info("Expected Values for the Test\n" + testData.prettify());
 	}
 
 	@Override
@@ -213,7 +211,7 @@ public class TestNGService implements ITestNGService {
 			reportPortalService.finishTestItem(String.valueOf(testResult.getAttribute(ID)), rq);
 		}
 		catch (Exception e) {
-			handleException(e, logger, new StringBuilder("Unable finish test method: '")
+			handleException(e, Logger.out, new StringBuilder("Unable finish test method: '")
 					.append(String.valueOf(testResult.getAttribute(ID)))
 					.append("'").toString());
 		}
@@ -237,7 +235,7 @@ public class TestNGService implements ITestNGService {
 			rs = reportPortalService.startTestItem(parentId, rq);
 		}
 		catch (Exception e) {
-			handleException(e, logger, "Unable start configuration: '" + configName + "'");
+			handleException(e, Logger.out, "Unable start configuration: '" + configName + "'");
 		}
 		if (rs != null) {
 			testResult.setAttribute(ID, rs.getId());
@@ -258,7 +256,7 @@ public class TestNGService implements ITestNGService {
 			slrq.setMessage("Just exception");
 		slrq.setLogTime(Calendar.getInstance().getTime());
 		String screenShotPath = Screenshots.screenshots.takeScreenShot();
-		logger.error("RP_MESSAGE#FILE#{}#{}", screenShotPath.replace("png", "html"), "Page source in HTML format");
+		Logger.out.error("RP_MESSAGE#FILE#{}#{}", screenShotPath.replace("png", "html"), "Page source in HTML format");
 		SaveLogRQ.File file = new SaveLogRQ.File();
 		file.setName(String.valueOf(result.getAttribute(ID)));
 		file.setContent(Files.asByteSource(new File(screenShotPath)));
@@ -267,7 +265,7 @@ public class TestNGService implements ITestNGService {
 			reportPortalService.log(slrq);
 		}
 		catch (Exception e1) {
-			handleException(e1, logger, "Unable to send message to Report Portal");
+			handleException(e1, Logger.out, "Unable to send message to Report Portal");
 		}
 	}
 

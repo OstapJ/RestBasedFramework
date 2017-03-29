@@ -8,7 +8,7 @@ import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-import com.wbeedvc.taf.Props;
+import com.wbeedvc.taf.property.Props;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

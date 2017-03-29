@@ -2,7 +2,6 @@ package com.wbeedvc.taf.pageobject;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.wbeedvc.taf.Props;
 import com.wbeedvc.taf.dto.CarDto;
 import com.wbeedvc.taf.util.BeanUtilHelper;
 
@@ -15,8 +14,8 @@ public class MainPage extends AbstractPage {
                            searchButton = $("[class='btn-green-2 btn']");
 
     public SelenideElement getSearchButton() {
-        String locator = Props.getRestEndPoint("mainPage.searchButton");
-        return $(locator);
+//        String locator = Props.getRestEndPoint("mainPage.searchButton");
+        return $("[class='btn-green-2 btn']");
     }
 
     public MainPage open() {
