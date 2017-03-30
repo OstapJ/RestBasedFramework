@@ -22,8 +22,8 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>json-path</artifactId>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
         </dependency>
         <dependency>
             <groupId>com.epam.reportportal</groupId>

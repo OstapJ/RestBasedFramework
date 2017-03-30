@@ -1,20 +1,17 @@
 package com.wbeedvc.test;
 
-import com.wbeedvc.taf.annotation.TestData;
 import com.jayway.restassured.path.json.JsonPath;
+import com.wbeedvc.taf.annotation.TestData;
 import com.wbeedvc.taf.dto.CreateDashboardDTO;
 import com.wbeedvc.taf.dto.DashboardDTO;
-import org.apache.http.HttpStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.annotations.Test;
 import com.wbeedvc.taf.property.Props;
+import org.apache.http.HttpStatus;
+import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DashboardIT extends Configuration {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(DashboardIT.class);
 	private String createdDashboardId;
 
 	//@formatter:off
@@ -25,7 +22,7 @@ public class DashboardIT extends Configuration {
         DashboardDTO actualBody =
 			givenConfig().
 			when().
-					get(Props.getRestEndPoint("dashboardById"), testData.get("projectName"), testData.get("dashboardId")).
+					get(Props.getProperty("dashboardById"), testData.get("projectName"), testData.get("dashboardId")).
 			then().
 					statusCode(HttpStatus.SC_OK).
 			extract().
@@ -39,13 +36,11 @@ public class DashboardIT extends Configuration {
     @Test(description = "TestCase-2014 Get Dashboards", dataProvider = DATA_PROVIDER_METHOD)
     @TestData("getDashboards.json")
     public void getDashboards(final JsonPath testData) {
-		LOGGER.debug("Just wanna check that logging works");
-
 		DashboardDTO[] dto = testData.getObject("dashboards", DashboardDTO[].class);
         DashboardDTO[] expectedDto =
 			givenConfig().
 			when().
-					get(Props.getRestEndPoint("dashboard"), testData.getString("projectName")).
+					get(Props.getProperty("dashboard"), testData.getString("projectName")).
 			then().
 					statusCode(HttpStatus.SC_OK).
 			extract().
@@ -57,39 +52,29 @@ public class DashboardIT extends Configuration {
     @Test(description = "TestCase-2015 Post Dashboard", dataProvider = DATA_PROVIDER_METHOD)
     @TestData("postDashboard.json")
     public void postDashboard(final JsonPath testData) {
-		LOGGER.debug("Just wanna check that logging works");
-
 		CreateDashboardDTO createDashboardDTO = testData.getObject("createDashboardDTO", CreateDashboardDTO.class);
         DashboardDTO dashboardDTO = testData.getObject("dashboard", DashboardDTO.class);
-
         createdDashboardId =
 			givenConfig().
 					body(createDashboardDTO)
 			.when()
-					.post(Props.getRestEndPoint("dashboard"), testData.getString("projectName"))
+					.post(Props.getProperty("dashboard"), testData.getString("projectName"))
 			.then()
 					.statusCode(HttpStatus.SC_CREATED)
 			.extract().
 					body().jsonPath().get("id");
 		DashboardDTO actualDto = givenConfig().
 			when().
-					get(Props.getRestEndPoint("dashboardById"), testData.get("projectName"), createdDashboardId).
+					get(Props.getProperty("dashboardById"), testData.get("projectName"), createdDashboardId).
 			then().
 					statusCode(HttpStatus.SC_OK).
 			extract().
 					response().as(DashboardDTO.class);
 
 		assertThat(actualDto).as("Response Body doesn't match to the expected one").isEqualTo(dashboardDTO);
-    }
-    @Test(description = "TestCase-2016 Delete Dashboard", dependsOnMethods = {
-            "postDashboard" }, dataProvider = DATA_PROVIDER_METHOD)
-    @TestData("postDashboard.json")
-    public void deleteDashboard(final JsonPath testData) {
-		LOGGER.debug("Just wanna check that logging works");
-
 		givenConfig().
 				when().
-				delete(Props.getRestEndPoint("dashboardById"), testData.get("projectName"), createdDashboardId).
+				delete(Props.getProperty("dashboardById"), testData.get("projectName"), createdDashboardId).
 				then().
 				statusCode(HttpStatus.SC_OK);
     }

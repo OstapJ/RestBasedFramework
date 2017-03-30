@@ -1,9 +1,10 @@
 package com.wbeedvc.taf;
 
+import com.jayway.restassured.path.json.JsonPath;
+import com.jayway.restassured.path.json.config.JsonPathConfig;
 import com.wbeedvc.taf.annotation.TestData;
 import com.wbeedvc.taf.exception.TestDataException;
-import io.restassured.path.json.JsonPath;
-import io.restassured.path.json.config.JsonPathConfig;
+import com.wbeedvc.taf.property.Props;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
@@ -13,13 +14,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 
-//@Listeners({ ReportPortalTestNGListener.class})
 public class Configuration {
 	protected static final String DATA_PROVIDER_METHOD = "loadFromExamplesTable";
-
-	public Configuration() {
-
-	}
 
 	@DataProvider(name = DATA_PROVIDER_METHOD)
 	public Object[][] loadFromExamplesTable(Method method) {
@@ -40,7 +36,7 @@ public class Configuration {
 
 	@BeforeSuite
 	public void init() {
-//		System.setProperty("webdriver.chrome.driver", "C:\\Windows\\System32\\chromedriver.exe");
-		com.codeborne.selenide.Configuration.browser = "chrome";
+		System.setProperty("webdriver.chrome.driver", Props.getProperty("webdriver.chrome.driver"));
+		com.codeborne.selenide.Configuration.browser = Props.getProperty("browser") ;
 	}
 }

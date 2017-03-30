@@ -1,14 +1,13 @@
 package com.wbeedvc.test;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.jayway.restassured.path.json.JsonPath;
 import com.wbeedvc.taf.Configuration;
 import com.wbeedvc.taf.annotation.TestData;
 import com.wbeedvc.taf.dto.CarDto;
 import com.wbeedvc.taf.pageobject.CarMarketPage;
 import com.wbeedvc.taf.pageobject.MainPage;
-import io.restassured.path.json.JsonPath;
 import org.testng.annotations.Test;
-
 
 public class UserStory2015 extends Configuration {
 

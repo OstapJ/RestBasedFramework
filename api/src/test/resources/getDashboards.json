@@ -1,31 +1,30 @@
 {
-  "projectName": "crt-odc",
-  "dashboardId": "585ceea03cdea20008436b6c",
+  "projectName": "ievgen_ostapenko_personal",
   "dashboards": [
     {
       "owner": "ievgen_ostapenko",
-      "isShared": "true",
-      "name": "Smoke"
-    },
-    {
-      "owner": "ievgen_ostapenko",
-      "isShared": "true",
-      "name": "Single Story"
-    },
-    {
-      "owner": "ievgen_ostapenko",
-      "isShared": "true",
-      "name": "REGRESSION"
+      "isShared": "false",
+      "name": "Just Try"
     },
     {
       "owner": "ievgen_ostapenko",
       "isShared": "false",
-      "name": "My Dashboard"
+      "name": "AutoTestDashboard3"
     },
     {
       "owner": "ievgen_ostapenko",
       "isShared": "false",
-      "name": "My DashboardA"
+      "name": "AutoTestDashboard4"
+    },
+    {
+      "owner": "ievgen_ostapenko",
+      "isShared": "false",
+      "name": "AutoTestDashboard5"
+    },
+    {
+      "owner": "ievgen_ostapenko",
+      "isShared": "false",
+      "name": "AutoTestDashboard6"
     }
   ]
 }

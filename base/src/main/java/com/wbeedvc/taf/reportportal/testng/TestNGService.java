@@ -1,12 +1,10 @@
 package com.wbeedvc.taf.reportportal.testng;
 
 import com.codeborne.selenide.Screenshots;
+import com.codeborne.selenide.WebDriverRunner;
 import com.epam.reportportal.listeners.ListenerParameters;
 import com.epam.reportportal.listeners.ReportPortalListenerContext;
 import com.epam.reportportal.service.BatchedReportPortalService;
-import com.wbeedvc.taf.logger.Logger;
-import com.wbeedvc.taf.reportportal.common.Statuses;
-import com.wbeedvc.taf.reportportal.common.TestMethodType;
 import com.epam.ta.reportportal.ws.model.EntryCreatedRS;
 import com.epam.ta.reportportal.ws.model.FinishExecutionRQ;
 import com.epam.ta.reportportal.ws.model.FinishTestItemRQ;
@@ -18,7 +16,10 @@ import com.epam.ta.reportportal.ws.model.log.SaveLogRQ;
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
-import io.restassured.path.json.JsonPath;
+import com.wbeedvc.taf.logger.Logger;
+import com.wbeedvc.taf.reportportal.common.Statuses;
+import com.wbeedvc.taf.reportportal.common.TestMethodType;
+import com.jayway.restassured.path.json.JsonPath;
 import org.testng.ISuite;
 import org.testng.ISuiteResult;
 import org.testng.ITestContext;
@@ -255,12 +256,15 @@ public class TestNGService implements ITestNGService {
 		else
 			slrq.setMessage("Just exception");
 		slrq.setLogTime(Calendar.getInstance().getTime());
-		String screenShotPath = Screenshots.screenshots.takeScreenShot();
-		Logger.out.error("RP_MESSAGE#FILE#{}#{}", screenShotPath.replace("png", "html"), "Page source in HTML format");
-		SaveLogRQ.File file = new SaveLogRQ.File();
-		file.setName(String.valueOf(result.getAttribute(ID)));
-		file.setContent(Files.asByteSource(new File(screenShotPath)));
-		slrq.setFile(file);
+		if(WebDriverRunner.hasWebDriverStarted()){
+			String screenShotPath = Screenshots.screenshots.takeScreenShot();
+			Logger.out.error("RP_MESSAGE#FILE#{}#{}", screenShotPath.replace("png", "html"), "Page source in HTML format");
+			SaveLogRQ.File file = new SaveLogRQ.File();
+			file.setName(String.valueOf(result.getAttribute(ID)));
+			file.setContent(Files.asByteSource(new File(screenShotPath)));
+			slrq.setFile(file);
+		}
+
 		try {
 			reportPortalService.log(slrq);
 		}
