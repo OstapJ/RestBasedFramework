@@ -7,7 +7,7 @@ import com.wbeedvc.taf.pageobject.widget.AutoSectionWidgetCustom;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class CarMarketPage extends AbstractPage {
+public class CarMarketPage {
 
 	public AutoSectionWidgetCustom autoSectionWidget;
 	public ElementsCollection carLinks = $$("table[class='autoba-table adverts-table'] td h2 a");

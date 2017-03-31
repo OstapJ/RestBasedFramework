@@ -7,7 +7,7 @@ import com.wbeedvc.taf.util.BeanUtilHelper;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class MainPage extends AbstractPage {
+public class MainPage {
 
     public SelenideElement markDropDown = $("#car-1>select"),
                            modelDropDown = $("#car-2>select"),

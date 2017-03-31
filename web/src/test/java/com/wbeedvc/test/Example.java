@@ -9,7 +9,7 @@ import com.wbeedvc.taf.pageobject.CarMarketPage;
 import com.wbeedvc.taf.pageobject.MainPage;
 import org.testng.annotations.Test;
 
-public class UserStory2015 extends Configuration {
+public class Example extends Configuration {
 
 	@Test(description = "WBEEDVC-117 - Verify that Car search functionality works as expected", groups = {
 			"smoke" }, dataProvider = DATA_PROVIDER_METHOD)
