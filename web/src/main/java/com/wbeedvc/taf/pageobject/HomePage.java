@@ -5,7 +5,7 @@ import com.wbeedvc.taf.pageobject.widget.LoginAndRegistrationWidget;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class HomePage {
+public class HomePage extends AbstractPage {
 
     public LoginAndRegistrationWidget loginAndRegistrationWidget;
 
@@ -14,7 +14,7 @@ public class HomePage {
     }
 
     public HomePage open() {
-        Selenide.open("http://ecsa00400275.epam.com:4503/content/ellen/home.html#/");
+        Selenide.open("");
         return this;
     }
 }

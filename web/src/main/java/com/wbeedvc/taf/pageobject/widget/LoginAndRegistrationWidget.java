@@ -1,14 +1,13 @@
 package com.wbeedvc.taf.pageobject.widget;
 
 import com.codeborne.selenide.SelenideElement;
+import com.wbeedvc.taf.pageobject.AbstractPage;
 import com.wbeedvc.taf.pageobject.FaceBookLoginPage;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-public class LoginAndRegistrationWidget {
+public class LoginAndRegistrationWidget extends AbstractPage {
 
     private static final String REGISTER_BUTTON_TEXT = "Register";
 
@@ -70,14 +69,5 @@ public class LoginAndRegistrationWidget {
         loginViaFacebookLink.click();
         switchBetweenWindows();
         return new FaceBookLoginPage();
-    }
-
-    //TODO: move this method to common class
-    public void switchBetweenWindows() {
-        String currentWindowHandle = getWebDriver().getWindowHandle();
-        Wait().until(ExpectedConditions.numberOfWindowsToBe(2));
-        String requiredWindowHandle = getWebDriver().getWindowHandles().stream()
-                .filter(window -> !window.equals(currentWindowHandle)).findFirst().get();
-        switchTo().window(requiredWindowHandle);
     }
 }

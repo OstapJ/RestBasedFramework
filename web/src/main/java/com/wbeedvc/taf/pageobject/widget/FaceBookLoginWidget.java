@@ -1,16 +1,13 @@
 package com.wbeedvc.taf.pageobject.widget;
 
 import com.codeborne.selenide.SelenideElement;
+import com.wbeedvc.taf.pageobject.AbstractPage;
 import com.wbeedvc.taf.pageobject.ProfilePage;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.Wait;
-import static com.codeborne.selenide.Selenide.switchTo;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-public class FaceBookLoginWidget {
+public class FaceBookLoginWidget extends AbstractPage{
 
     public SelenideElement rootElement;
     public SelenideElement emailInput = $("#email"),
@@ -37,14 +34,5 @@ public class FaceBookLoginWidget {
         logInFaceBook(email, password);
         switchBetweenWindows();
         return new ProfilePage();
-    }
-
-    //TODO: move this method to common class
-    public void switchBetweenWindows() {
-        String currentWindowHandle = getWebDriver().getWindowHandle();
-        Wait().until(ExpectedConditions.numberOfWindowsToBe(2));
-        String requiredWindowHandle = getWebDriver().getWindowHandles().stream()
-                .filter(window -> !window.equals(currentWindowHandle)).findFirst().get();
-        switchTo().window(requiredWindowHandle);
     }
 }
