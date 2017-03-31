@@ -22,15 +22,4 @@ public class Example extends Configuration {
 		carMarketPage.clickCarLinkByText(car.getMarkDropDown()).
 				costLabels.shouldHave(CollectionCondition.texts(car.getCarPrices()));
 	}
-
-	@Test(dataProvider = DATA_PROVIDER_METHOD)
-	@TestData("verifyCarSearch.json")
-	public void verifyCarSearchDouble(final JsonPath expData) {
-		CarDto car = expData.getObject(CarDto.NAME, CarDto.class);
-		CarMarketPage carMarketPage = new MainPage().
-				open().
-				searchByCriteria(car);
-		carMarketPage.clickCarLinkByText(car.getMarkDropDown()).
-				costLabels.shouldHave(CollectionCondition.texts(car.getCarPrices()));
-	}
 }

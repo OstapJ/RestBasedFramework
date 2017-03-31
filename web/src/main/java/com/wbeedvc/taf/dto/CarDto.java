@@ -1,8 +1,6 @@
 package com.wbeedvc.taf.dto;
 
-/**
- * Created by Ostap on 26.03.2017.
- */
+
 public class CarDto {
     public static final String NAME = "car";
 

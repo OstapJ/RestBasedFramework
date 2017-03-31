@@ -5,7 +5,6 @@ import com.jayway.restassured.path.json.config.JsonPathConfig;
 import com.wbeedvc.taf.annotation.TestData;
 import com.wbeedvc.taf.exception.TestDataException;
 import com.wbeedvc.taf.property.Props;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
 import java.io.File;
@@ -16,6 +15,11 @@ import java.net.URL;
 
 public class Configuration {
 	protected static final String DATA_PROVIDER_METHOD = "loadFromExamplesTable";
+
+	static {
+		System.setProperty("webdriver.chrome.driver", Props.getProperty("webdriver.chrome.driver"));
+		com.codeborne.selenide.Configuration.browser = Props.getProperty("browser") ;
+	}
 
 	@DataProvider(name = DATA_PROVIDER_METHOD)
 	public Object[][] loadFromExamplesTable(Method method) {
@@ -34,9 +38,4 @@ public class Configuration {
 		}
 	}
 
-	@BeforeSuite
-	public void init() {
-		System.setProperty("webdriver.chrome.driver", Props.getProperty("webdriver.chrome.driver"));
-		com.codeborne.selenide.Configuration.browser = Props.getProperty("browser") ;
-	}
 }

@@ -47,8 +47,9 @@
                         </goals>
                         <configuration>
                             <testFailureIgnore>true</testFailureIgnore>
-                            <!--<parallel>methods</parallel>-->
-                            <!--<threadCount>2</threadCount>-->
+                            <parallel>classes</parallel>
+                            <threadCount>1</threadCount>
+                            <perCoreThreadCount>true</perCoreThreadCount>
                             <properties>
                                 <property>
                                     <name>listener</name>
@@ -56,7 +57,7 @@
                                 </property>
                             </properties>
                             <includes>
-                                <include>**/*IT.class</include>
+                                <include>**/UserStory*.class</include>
                             </includes>
                         </configuration>
                     </execution>
