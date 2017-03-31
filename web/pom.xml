@@ -45,8 +45,9 @@
                             <value>com.wbeedvc.taf.reportportal.testng.ReportPortalTestNGListener</value>
                         </property>
                     </properties>
-                    <parallel>methods</parallel>
-                    <threadCount>2</threadCount>
+                    <parallel>classes</parallel>
+                    <threadCount>1</threadCount>
+                    <perCoreThreadCount>true</perCoreThreadCount>
                 </configuration>
                 <executions>
                     <execution>

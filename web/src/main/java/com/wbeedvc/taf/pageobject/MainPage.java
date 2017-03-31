@@ -14,7 +14,6 @@ public class MainPage extends AbstractPage {
                            searchButton = $("[class='btn-green-2 btn']");
 
     public SelenideElement getSearchButton() {
-//        String locator = Props.getRestEndPoint("mainPage.searchButton");
         return $("[class='btn-green-2 btn']");
     }
 

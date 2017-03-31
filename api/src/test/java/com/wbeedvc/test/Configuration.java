@@ -11,7 +11,6 @@ import com.jayway.restassured.specification.RequestSpecification;
 import com.wbeedvc.taf.annotation.TestData;
 import com.wbeedvc.taf.exception.TestDataException;
 import com.wbeedvc.taf.property.Props;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
 import java.io.File;
@@ -22,19 +21,13 @@ import java.net.URL;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.internal.mapper.ObjectMapperType.GSON;
 
-/**
- * Created by Ostap on 22.03.2017.
- */
 public abstract class Configuration {
     protected static final String DATA_PROVIDER_METHOD = "loadFromExamplesTable";
     private static final String ENCODING = "UTF-8";
 
     public Configuration() {
-
     }
-
-    @BeforeSuite
-    public void setUp() {
+    static {
         RestAssured.config = new RestAssuredConfig().
                 decoderConfig(new DecoderConfig(ENCODING)).
                 encoderConfig(new EncoderConfig(ENCODING, ENCODING)).
@@ -45,7 +38,6 @@ public abstract class Configuration {
     protected static RequestSpecification givenConfig() {
         return given().header("Accept-Language", "en").
                 header("Content-Type", "application/json").
-                header("Authorization", "Bearer d2325780-5c4f-473c-a069-659f731d062c").
                 log().all();
     }
 
