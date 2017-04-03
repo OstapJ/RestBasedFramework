@@ -14,7 +14,7 @@ public class HomePage extends AbstractPage {
     }
 
     public HomePage open() {
-        Selenide.open("");
+        Selenide.open("http://ecsa00400275.epam.com:4503/content/ellen/home.html#/");
         return this;
     }
 }

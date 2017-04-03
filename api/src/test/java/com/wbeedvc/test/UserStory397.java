@@ -25,6 +25,7 @@ public class UserStory397 extends Configuration {
 			when().
 					get(Props.getProperty("facebookStatus")).
 			then().
+					log().status().log().body().
 					statusCode(HttpStatus.SC_OK).
 			extract().
 					response().as(StatusDTO.class);

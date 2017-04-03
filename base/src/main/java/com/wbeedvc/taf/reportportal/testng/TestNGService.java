@@ -192,8 +192,14 @@ public class TestNGService implements ITestNGService {
 			testResult.setAttribute(ID, rs.getId());
 			ReportPortalListenerContext.setRunningNowItemId(rs.getId());
 		}
-		JsonPath testData = (JsonPath) testResult.getParameters()[0];
-		Logger.out.info("Expected Values for the Test\n" + testData.prettify());
+		printTestData(testResult.getParameters());
+	}
+
+	private void printTestData(Object[] obj) {
+		if (obj.length != 0) {
+			JsonPath testData = (JsonPath) obj[0];
+			Logger.out.info("Expected Values for the Test\n" + testData.prettify());
+		}
 	}
 
 	@Override
@@ -256,9 +262,10 @@ public class TestNGService implements ITestNGService {
 		else
 			slrq.setMessage("Just exception");
 		slrq.setLogTime(Calendar.getInstance().getTime());
-		if(WebDriverRunner.hasWebDriverStarted()){
+		if (WebDriverRunner.hasWebDriverStarted()) {
 			String screenShotPath = Screenshots.screenshots.takeScreenShot();
-			Logger.out.error("RP_MESSAGE#FILE#{}#{}", screenShotPath.replace("png", "html"), "Page source in HTML format");
+			Logger.out.error("RP_MESSAGE#FILE#{}#{}", screenShotPath.replace("png", "html"),
+					"Page source in HTML format");
 			SaveLogRQ.File file = new SaveLogRQ.File();
 			file.setName(String.valueOf(result.getAttribute(ID)));
 			file.setContent(Files.asByteSource(new File(screenShotPath)));

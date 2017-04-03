@@ -12,7 +12,6 @@ import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-
 public class Configuration {
 	protected static final String DATA_PROVIDER_METHOD = "loadFromExamplesTable";
 
